@@ -9,7 +9,7 @@ interface Notification {
 }
 
 interface NotificationContextType {
-  showNotification: (type: NotificationType, ...message: React.ReactNode[]) => void;
+  showNotification: (type: NotificationType, ...message: React.ReactNode[]) => string;
   notifications: Notification[];
   removeNotification: (id: string) => void;
 }

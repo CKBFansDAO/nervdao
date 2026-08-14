@@ -15,6 +15,7 @@ import { IckbModal } from "./IckbModal";
 import { useTranslation } from "react-i18next";
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from "@/i18n/config";
 import LanguageSwitcher from "./LanguageSwitcher";
+import Transfer from "./Transfer";
 
 function NavItem({
   icon,
@@ -84,6 +85,8 @@ const AppLayout: React.FC = () => {
         return t("common.dashboard");
       case "deposit":
         return t("common.deposit");
+      case "transfer":
+        return t("common.transfer");
       case "ickb":
         return <>
           iCKB
@@ -113,6 +116,8 @@ const AppLayout: React.FC = () => {
         return <Dashboard setCurrentPage={setCurrentPage} />;
       case "deposit":
         return <Deposit />;
+      case "transfer":
+        return <Transfer />;
       case "ickb":
         return <Ickb />;
     }
@@ -132,6 +137,12 @@ const AppLayout: React.FC = () => {
                 label={t("common.dashboard")}
                 isActive={currentPage === "dashboard"}
                 onClick={() => setCurrentPage("dashboard")}
+              />
+              <NavItem
+                icon="Send"
+                label={t("common.transfer")}
+                isActive={currentPage === "transfer"}
+                onClick={() => setCurrentPage("transfer")}
               />
               <NavItem
                 icon="Download"
@@ -185,6 +196,12 @@ const AppLayout: React.FC = () => {
                 label={t("common.dashboard")}
                 isActive={currentPage === "dashboard"}
                 onClick={() => setCurrentPage("dashboard")}
+              />
+              <NavItemMobile
+                icon="Send"
+                label={t("common.transfer")}
+                isActive={currentPage === "transfer"}
+                onClick={() => setCurrentPage("transfer")}
               />
               <NavItemMobile
                 icon="Download"

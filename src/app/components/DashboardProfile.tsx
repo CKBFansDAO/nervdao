@@ -11,7 +11,9 @@ import { User } from "lucide-react";
 import { getUserUdtCapacityBySigner } from "@/cores/queries";
 import { useTranslation } from "react-i18next";
 
-const DashboardProfile: React.FC = () => {
+const DashboardProfile: React.FC<{
+  setCurrentPage: (page: string) => void;
+}> = ({ setCurrentPage }) => {
   const { t } = useTranslation();
   const [balance, setBalance] = useState<string>("");
   const [ickbBbalance, setIckbBbalance] = useState<string>("");
@@ -126,21 +128,36 @@ const DashboardProfile: React.FC = () => {
           value: balance,
           percentage: availablePercentage,
           color: "#3CFF97",
+          targetPage: "transfer",
         },
         {
           label: t("dashboardProfile.depositedCkb"),
           value: ccc.fixedPointToString(depositSum),
           percentage: depositedPercentage,
           color: "#00FAED",
+          targetPage: undefined,
         },
         {
           label: t("dashboardProfile.redeemingCkb"),
           value: ccc.fixedPointToString(withdrawalSum),
           percentage: withdrawingPercentage,
           color: "#8C76FF",
+          targetPage: undefined,
         },
-      ].map(({ label, value, percentage, color }, index) => (
-        <div key={index} className="bg-gray-800 relative rounded-lg p-3 mb-2">
+      ].map(({ label, value, percentage, color, targetPage }, index) => (
+        <div
+          key={index}
+          className={`bg-gray-800 relative rounded-lg p-3 mb-2 ${targetPage ? "cursor-pointer" : ""}`}
+          onClick={() => targetPage && setCurrentPage(targetPage)}
+          role={targetPage ? "button" : undefined}
+          tabIndex={targetPage ? 0 : undefined}
+          onKeyDown={(event) => {
+            if (targetPage && (event.key === "Enter" || event.key === " ")) {
+              event.preventDefault();
+              setCurrentPage(targetPage);
+            }
+          }}
+        >
           <div className="flex justify-between items-center">
             <span className="font-work-sans text-gray-400">{label}</span>
           </div>
@@ -160,7 +177,18 @@ const DashboardProfile: React.FC = () => {
         </div>
       ))}
        
-      <div className="bg-brand-to-green relative rounded-lg p-3 pr-5 mb-2">
+      <div
+        className="bg-brand-to-green relative rounded-lg p-3 pr-5 mb-2 cursor-pointer"
+        onClick={() => setCurrentPage("deposit")}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setCurrentPage("deposit");
+          }
+        }}
+      >
         <div className="flex justify-between items-center font-work-sans text-white">
           <span>{t("dashboardProfile.currentCompensation")}</span>
           <span>{t("dashboardProfile.apy")}</span>
@@ -170,7 +198,18 @@ const DashboardProfile: React.FC = () => {
           <span>{apy}</span>
         </div>
       </div>
-      <div className="bg-gray-800 relative rounded-lg p-3 mb-2">
+      <div
+        className="bg-gray-800 relative rounded-lg p-3 mb-2 cursor-pointer"
+        onClick={() => setCurrentPage("ickb")}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setCurrentPage("ickb");
+          }
+        }}
+      >
           <div className="flex justify-between items-center">
             <span className="font-work-sans text-gray-400">{t("dashboardProfile.ickbBalance")}</span>
           </div>

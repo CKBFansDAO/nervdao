@@ -18,7 +18,7 @@ export function Dashboard({
   return (
     <div className="flex flex-col lg:flex-row flex-grow lg:items-stretch gap-6">
       <div className="flex flex-col flex-1 gap-6">
-        <DashboardProfile />
+        <DashboardProfile setCurrentPage={setCurrentPage} />
         <DashboardRecentTransactions className="hidden lg:flex" />
       </div>
       <div className="bg-gray-900 rounded-lg p-6 flex flex-col flex-[2]">
