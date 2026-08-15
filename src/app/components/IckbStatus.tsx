@@ -3,7 +3,6 @@ import { Info } from "lucide-react";
 import React, { useEffect, useState } from "react";
 // import ReactApexChart from "react-apexcharts";
 import { ccc } from "@ckb-ccc/connector-react";
-import SkeletonLoader from "./SkeletonLoader";
 import { IckbDateType } from "@/cores/utils";
 import { useTranslation } from "react-i18next";
 
@@ -53,7 +52,24 @@ const IckbStatus: React.FC<{ ickbData: IckbDateType }> = ({ ickbData }) => {
     return () => clearInterval(interval);
   }, [signer]);
   if (isLoadingBalance) {
-    return <SkeletonLoader />;
+    return (
+      <div className="bg-gray-900 rounded-lg p-6 mb-4 mt-4 animate-pulse">
+        <h3 className="text-xl font-play font-bold mb-4">
+          {t("ickbStatus.liquidity")}
+        </h3>
+        <div className="flex flex-col sm:flex-row items-center justify-between">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-gray-800 rounded-lg p-3 pr-5 mb-2 w-full sm:w-[30%]"
+            >
+              <div className="h-4 w-24 bg-gray-700 rounded" />
+              <div className="h-7 w-32 bg-gray-700 rounded mt-1" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
   return (
     <div className="bg-gray-900 rounded-lg p-6 mb-4 mt-4">

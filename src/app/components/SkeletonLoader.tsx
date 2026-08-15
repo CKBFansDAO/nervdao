@@ -8,7 +8,7 @@ interface SkeletonLoaderProps {
 
 const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   showHeader = true,
-  itemCount = 4,
+  itemCount = 5,
   showChart = false,
 }) => {
   return (
@@ -24,14 +24,19 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
       )}
       
       {Array.from({ length: itemCount }).map((_, index) => (
-        <div key={index} className="bg-gray-800 rounded-lg p-3 mb-2">
-          <div className="flex justify-between items-center mb-2">
+        <div
+          key={index}
+          className="bg-gray-800 rounded-lg p-3 mb-2 relative h-20"
+        >
+          <div className="flex justify-between items-center mb-3">
             <div className="h-4 bg-gray-700 rounded w-24"></div>
-            {showChart ? (
-              <div className="w-12 h-12 bg-gray-700 rounded"></div>
-            ) : (
-              <div className="rounded-full bg-gray-700 w-12 h-12"></div>
-            )}
+            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+              {showChart ? (
+                <div className="w-12 h-12 bg-gray-700 rounded"></div>
+              ) : (
+                <div className="rounded-full bg-gray-700 w-12 h-12"></div>
+              )}
+            </div>
           </div>
           <div className="h-6 bg-gray-700 rounded w-32"></div>
         </div>
