@@ -6,6 +6,7 @@ const en = {
     transfer: "Transfer",
     ickb: "iCKB",
     explore: "Explore",
+    omiga: "Omiga",
     aboutUs: "About us",
     source: "Source",
     language: "Language",

@@ -37,7 +37,7 @@ function NavItem({
         }`}
       onClick={onClick}
     >
-      {iconName ? <img src={"/svg/icon-" + iconName + ".svg"} alt="ickb" className="w-7 h-7" /> : <Icon className="w-7 h-7" />}
+      {iconName ? <img src={"/svg/icon-" + iconName + ".svg"} alt={iconName} className={iconName === "ickb" ? "w-8 h-8" : "w-7 h-7"} /> : <Icon className="w-7 h-7" />}
 
       <p className="font-work-sans text-xs transform scale-75">{label}</p>
     </li>
@@ -65,7 +65,7 @@ function NavItemMobile({
         }`}
       onClick={onClick}
     >
-      {iconName ? <img src={"/svg/icon-" + iconName + ".svg"} alt="ickb" className="w-7 h-7" /> : <Icon className="w-7 h-7" />}
+      {iconName ? <img src={"/svg/icon-" + iconName + ".svg"} alt={iconName} className={iconName === "ickb" ? "w-8 h-8" : "w-7 h-7"} /> : <Icon className="w-7 h-7" />}
       <p className="font-work-sans transform scale-75">{label}</p>
     </li>
   );
@@ -162,6 +162,12 @@ const AppLayout: React.FC = () => {
                 label={t("common.explore")}
                 onClick={() => window.open(`${index}/nervosdao`, "_blank")}
               />
+              <NavItem
+                iconName="omiga"
+                icon="Store"
+                label={t("common.omiga")}
+                onClick={() => window.open("https://omiga.io", "_blank")}
+              />
             </div>
             <div className="flex flex-col items-stretch gap-2">
               <NavItem
@@ -220,6 +226,12 @@ const AppLayout: React.FC = () => {
                 icon="ChartBarBig"
                 label={t("common.explore")}
                 onClick={() => window.open(`${index}/nervosdao`, "_blank")}
+              />
+              <NavItemMobile
+                iconName="omiga"
+                icon="Store"
+                label={t("common.omiga")}
+                onClick={() => window.open("https://omiga.io", "_blank")}
               />
               <NavItemMobile
                 icon="Twitter"

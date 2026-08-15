@@ -6,6 +6,7 @@ const zh = {
     transfer: "转账",
     ickb: "iCKB",
     explore: "浏览",
+    omiga: "Omiga",
     aboutUs: "关于我们",
     source: "源代码",
     language: "语言",
