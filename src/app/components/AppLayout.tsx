@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState } from "react";
@@ -171,12 +170,7 @@ const AppLayout: React.FC = () => {
             </div>
             <div className="flex flex-col items-stretch gap-2">
               <NavItem
-                icon="Twitter"
-                label={t("common.aboutUs")}
-                onClick={() => window.open("https://x.com/CKBDevrel", "_blank")}
-              />
-              <NavItem
-                icon="Github"
+                icon="CodeXml"
                 label={t("common.source")}
                 onClick={() => window.open("https://github.com/ckb-devrel/nervdao", "_blank")}
               />
@@ -234,14 +228,9 @@ const AppLayout: React.FC = () => {
                 onClick={() => window.open("https://omiga.io", "_blank")}
               />
               <NavItemMobile
-                icon="Twitter"
-                label={t("common.aboutUs")}
-                onClick={() => window.open("https://x.com/CKBDevrel", "_blank")}
-              />
-              <NavItemMobile
-                icon="Github"
+                icon="CodeXml"
                 label={t("common.source")}
-                onClick={() => window.open("https://x.com/CKBDevrel", "_blank")}
+                onClick={() => window.open("https://github.com/ckb-devrel/nervdao", "_blank")}
               />
             </ul>
             <div className="border-t border-white/10 mt-2 pt-4 px-6 pb-4">
@@ -274,7 +263,7 @@ const AppLayout: React.FC = () => {
         {renderContent()}
       </main>
       <Tooltip id="top-tooltip"
-        events={['click']}
+        openOnClick
         place={"bottom-start"}
         style={{
           color: "#fff",

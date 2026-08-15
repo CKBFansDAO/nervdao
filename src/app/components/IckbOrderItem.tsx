@@ -22,12 +22,10 @@ export function IckbOrderItem({
        
         if(!item||!walletConfig) return 
         const refresh = async () => {
-            console.log(walletConfig)
             const hexArray: Set<HexNumber> = new Set();
 
             if (item.blockNumber) {
                 hexArray.add(item.blockNumber)
-                console.log(1111,hexArray)
                 const header = await getHeadersByNumber(hexArray, walletConfig)
                 const timer = header.get(item.blockNumber)?.timestamp;
                 timer && setOrderDate(new Date(parseInt(timer, 16)).toLocaleString())

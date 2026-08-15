@@ -64,16 +64,7 @@ export function l1StateOptions(isFrozen: boolean) {
         refetchIntervalInBackground: false,
         // staleTime: 10000,
         queryKey: ["l1State"],
-        queryFn: async () => {
-            try {
-                const data = await getL1State(walletConfig);
-                console.log(data);
-                return data
-            } catch (e) {
-                console.log(e);
-                throw e;
-            }
-        },
+        queryFn: () => getL1State(walletConfig),
         placeholderData: {
             ickbUdtPoolBalance: BigInt(-1),
             ickbDaoBalance: BigInt(-1),
@@ -94,12 +85,11 @@ export function l1StateOptions(isFrozen: boolean) {
 }
 
 async function getL1State(walletConfig: WalletConfig) {
-    const { rpc, config, expander } = walletConfig;
-    console.log(11111)
+    const { client, rpc, config, expander } = walletConfig;
     const mixedCells = await getMixedCells(walletConfig);
 
-    // Prefetch feeRate and tipHeader
-    // const feeRatePromise = rpc.getFeeRate(BigInt(1));
+    // Prefetch the client-selected fee rate and tip header.
+    const feeRatePromise = client.getFeeRate();
     const tipHeaderPromise = rpc.getTipHeader();
 
     // Prefetch headers
@@ -217,9 +207,7 @@ async function getL1State(walletConfig: WalletConfig) {
         );
     }
 
-    // const feeRate = BigInt(Number(await feeRatePromise) + 1000);
-    // Reduce request overhead, fixed 2000.
-    const feeRate = BigInt(2000);
+    const feeRate = await feeRatePromise;
     const txBuilder = (direction: IckbDirection, amount: bigint) => {
         const txInfo = txInfoFrom({ tx: baseTx, info });
 
@@ -330,7 +318,6 @@ async function getTotalUdtCapacity(walletConfig: WalletConfig): Promise<{
 }> {
     const { rpc, config, accountLock } = walletConfig;
     const udtType = ickbUdtType(config);
-    console.log("udtType = ", udtType);
     let cursor = undefined;
     let udtCapacity = BigInt(0);
     let userUdtCapacity = BigInt(0);

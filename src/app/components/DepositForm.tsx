@@ -42,7 +42,7 @@ const DepositForm: React.FC = () => {
         );
 
         await tx.completeInputsByCapacity(signer);
-        await tx.completeFeeBy(signer, 1000);
+        await tx.completeFeeBy(signer);
         setTransactionFee(
           ccc.fixedPointToString(
             (await tx.getInputsCapacity(signer.client)) -
@@ -88,7 +88,7 @@ const DepositForm: React.FC = () => {
     }
     tx.outputs[0].capacity = ccc.fixedPointFrom(amount);
     await tx.completeInputsByCapacity(signer);
-    await tx.completeFeeBy(signer, 1000);
+    await tx.completeFeeBy(signer);
     setTransTbc(true)
     try {
       const txHash = await signer.sendTransaction(tx);
@@ -149,7 +149,7 @@ const DepositForm: React.FC = () => {
       ccc.KnownScript.NervosDao
     );
     await tx.completeInputsAll(signer);
-    await tx.completeFeeChangeToOutput(signer, 0, 1000);
+    await tx.completeFeeChangeToOutput(signer, 0);
     const amount = ccc.fixedPointToString(tx.outputs[0].capacity);
     setAmount(amount);
     setShowMaxBalanceHint(true);

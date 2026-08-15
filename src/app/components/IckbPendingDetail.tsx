@@ -24,10 +24,9 @@ const columns: Column[] = [
 
 
 const IckbPendingDetail: React.FC<PendingLisrProps> = (props: PendingLisrProps) => {
-    const [sortedTable, setSortedTable, dir, setDir, key, setKey] = UseSorter<
+    const [sortedTable, , dir, setDir, key, setKey] = UseSorter<
         SorterObj
     >(props.columns);
-    console.log(setSortedTable)
     const calculateDaysDifference = (timestamp1: number, timestamp2: number) => {
 
         try {

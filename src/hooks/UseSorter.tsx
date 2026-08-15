@@ -43,11 +43,9 @@ export default function UseSorter<T>(
     if (key !== undefined && dir !== undefined) {
       const result = data.sort((a: T, b: T) => {
         if (key && dir?.valueOf() === SortDirection.Ascending.valueOf()) {
-          // console.log("Ascending");
           return a[key] < b[key] ? -1 : 1;
         }
         if (key && dir?.valueOf() === SortDirection.Descending.valueOf()) {
-          // console.log("Descending");
           return a[key] > b[key] ? -1 : 1;
         }
         return 0;

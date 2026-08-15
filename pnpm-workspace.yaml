@@ -1,0 +1,5 @@
+packages:
+  - "."
+
+onlyBuiltDependencies:
+  - secp256k1

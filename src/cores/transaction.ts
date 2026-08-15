@@ -133,7 +133,6 @@ export function convert(
                 continue;
             }
             ickbCumulative = c;
-            console.log(Object.freeze({ ...d, ickbCumulative }))
             ickbPool.push(Object.freeze({ ...d, ickbCumulative }));
 
             if (ickbPool.length >= 30) {
@@ -288,7 +287,7 @@ export function addChange(
     let { tx, info } = txInfo;
 
     const { accountLock, addPlaceholders, config } = walletConfig;
-    // eslint-disable-next-line
+
     let txFee, freeCkb, freeIckbUdt;
     // eslint-disable-next-line
     ({ tx, freeIckbUdt } = addIckbUdtChange(tx, accountLock, config));
@@ -343,7 +342,6 @@ export function addChange(
 }
 
 export function meltOrder(myOrders: MyOrder[], myReceipts: MyReceipt[], feeRate: bigint, walletConfig: WalletConfig): TxInfo {
-    console.log(myOrders, myReceipts);
     const validOrders = myOrders.filter((o) => o.info.absProgress === o.info.absTotal);
     const info: IckbTxInfoI18nToken[] = validOrders.map((o) => ({
         i18nKey: "ickbTxInfo.extractFromOrder",

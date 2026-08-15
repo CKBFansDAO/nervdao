@@ -1,7 +1,6 @@
-import type { Config } from "tailwindcss";
-import type { PluginAPI } from 'tailwindcss/types/config'
+import plugin from "tailwindcss/plugin";
 
-const config: Config = {
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -220,33 +219,21 @@ const config: Config = {
       },
     },
   },
-  safelist: [
-    "bg-emerald-900",
-    "bg-purple-900",
-    "bg-cyan-900",
-    "bg-emerald-400",
-    "bg-purple-400",
-    "bg-cyan-400",
-    "text-emerald-400",
-    "text-purple-400",
-    "text-cyan-400",
-  ],
   plugins: [
-    function ({ addUtilities }: PluginAPI) {
+    plugin(function ({ addUtilities }) {
       addUtilities({
-        //@ts-expect-error tailwind type
         '.no-arrows': {
           /* Styles to remove arrows in various browsers */
           '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
             '-webkit-appearance': 'none',
-            margin: 0,
+            margin: '0',
           },
           '&::-moz-focus-inner': {
-            border: 0,
+            border: '0',
           },
         },
       });
-    },
+    }),
   ],
 };
 export default config;

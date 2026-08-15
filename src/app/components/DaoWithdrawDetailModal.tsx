@@ -121,7 +121,7 @@ export function DaoWithdrawDetailModal({
     );
 
     await tx.completeInputsByCapacity(signer);
-    await tx.completeFeeChangeToOutput(signer, 0, 1000);
+    await tx.completeFeeChangeToOutput(signer, 0);
     const result = await signer.sendTransaction(tx);
     showNotification("success", t("notifications.withdrawSuccess", { hash: result }));
   }, [signer, infos, dao, showNotification]);

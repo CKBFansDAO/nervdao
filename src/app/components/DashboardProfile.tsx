@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import CircularProgress from "./CircularProgress";
 import { ccc } from "@ckb-ccc/connector-react";

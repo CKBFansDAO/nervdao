@@ -7,7 +7,6 @@ const en = {
     ickb: "iCKB",
     explore: "Explore",
     omiga: "Omiga",
-    aboutUs: "About us",
     source: "Source",
     language: "Language",
     max: "MAX",

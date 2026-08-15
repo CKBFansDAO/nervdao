@@ -69,7 +69,7 @@ export function DaoDepositDetailModal({
       ccc.KnownScript.NervosDao
     );
     await tx.completeInputsByCapacity(signer);
-    await tx.completeFeeBy(signer, 1000);
+    await tx.completeFeeBy(signer);
     const result = await signer.sendTransaction(tx);
     showNotification("success", t("notifications.redeemSuccess", { hash: result }));
   };

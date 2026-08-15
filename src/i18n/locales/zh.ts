@@ -7,7 +7,6 @@ const zh = {
     ickb: "iCKB",
     explore: "浏览",
     omiga: "Omiga",
-    aboutUs: "关于我们",
     source: "源代码",
     language: "语言",
     max: "最大限度",

@@ -6,6 +6,7 @@ import type { QueryClient } from "@tanstack/react-query"
 
 export interface WalletConfig extends ChainConfig {
     address: ccc.Hex;
+    client: ccc.Client;
     accountLock: I8Script;
     expander: (c: Cell) => I8Script | undefined;
     addPlaceholders: (tx: helpers.TransactionSkeletonType) => helpers.TransactionSkeletonType;
@@ -41,6 +42,7 @@ export async function setupWalletConfig(signer: ccc.Signer,queryClient: QueryCli
    
     WalletConfig = {
         ...chainConfig,
+        client: signer.client,
          // @ts-expect-error '0xstring&&string'
         address: signerAddress.toString(),
         accountLock: signerLock,

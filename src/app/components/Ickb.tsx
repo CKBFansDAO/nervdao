@@ -41,7 +41,7 @@ const Ickb: React.FC = () => {
       </div>
       <Tooltip id="my-tooltip" />
       <Tooltip id="order-tooltip"
-        events={['click']}
+        openOnClick
         place={"bottom"}
         style={{
           color: "#fff",

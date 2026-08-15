@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNotification } from "@/context/NotificationProvider";

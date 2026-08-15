@@ -11,19 +11,19 @@ export function getClaimEpoch(
     intDiff % ccc.numFrom(180) !== ccc.numFrom(0) ||
     depositEpoch[1] * withdrawEpoch[2] <= depositEpoch[2] * withdrawEpoch[1]
   ) {
-    return [
+    return ccc.Epoch.from([
       depositEpoch[0] +
         (intDiff / ccc.numFrom(180) + ccc.numFrom(1)) * ccc.numFrom(180),
       depositEpoch[1],
       depositEpoch[2],
-    ];
+    ]);
   }
 
-  return [
+  return ccc.Epoch.from([
     depositEpoch[0] + (intDiff / ccc.numFrom(180)) * ccc.numFrom(180),
     depositEpoch[1],
     depositEpoch[2],
-  ];
+  ]);
 }
 
 export function getProfit(
