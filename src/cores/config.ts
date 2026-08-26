@@ -4,6 +4,15 @@ import { ChainConfig, chainConfigFrom, I8Script, lockExpanderFrom, i8ScriptPaddi
 import { getIckbScriptConfigs } from "@ickb/v1-core";
 import type { QueryClient } from "@tanstack/react-query"
 
+// Some bundled dependencies capture a detached reference to `fetch` and later
+// invoke it without `window` as the receiver, which throws
+// "Failed to execute 'fetch' on 'Window': Illegal invocation" in the browser.
+// Re-binding `window.fetch` to `window` makes it safe to call regardless of
+// how the reference is later invoked.
+if (typeof window !== "undefined" && typeof window.fetch === "function") {
+    window.fetch = window.fetch.bind(window);
+}
+
 export interface WalletConfig extends ChainConfig {
     address: ccc.Hex;
     client: ccc.Client;

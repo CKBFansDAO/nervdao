@@ -64,7 +64,14 @@ export function l1StateOptions(isFrozen: boolean) {
         refetchIntervalInBackground: false,
         // staleTime: 10000,
         queryKey: ["l1State"],
-        queryFn: () => getL1State(walletConfig),
+        queryFn: async () => {
+            try {
+                return await getL1State(walletConfig);
+            } catch (e) {
+                console.error("l1State query failed:", e);
+                throw e;
+            }
+        },
         placeholderData: {
             ickbUdtPoolBalance: BigInt(-1),
             ickbDaoBalance: BigInt(-1),
@@ -89,7 +96,11 @@ async function getL1State(walletConfig: WalletConfig) {
     const mixedCells = await getMixedCells(walletConfig);
 
     // Prefetch the client-selected fee rate and tip header.
-    const feeRatePromise = client.getFeeRate();
+    // Fall back to a fixed fee rate if the node doesn't support fee rate statistics.
+    const feeRatePromise = client.getFeeRate().catch((e) => {
+        console.error("client.getFeeRate() failed, falling back to fixed fee rate:", e);
+        return BigInt(2000);
+    });
     const tipHeaderPromise = rpc.getTipHeader();
 
     // Prefetch headers
